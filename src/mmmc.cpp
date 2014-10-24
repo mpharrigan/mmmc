@@ -1,16 +1,29 @@
 #include "mmmc.h"
+#include "music_model.h"
 
-#include <QtGui/QLabel>
 #include <QtGui/QMenu>
 #include <QtGui/QMenuBar>
 #include <QtGui/QAction>
 #include <QtGui/QFileDialog>
+#include <QtGui/QVBoxLayout>
+#include <QtGui/QTableView>
+#include <QtGui/QDockWidget>
 
 mmmc::mmmc()
 {
-    mainLabel = new QLabel(this);
-    mainLabel->setText( "Hello World!" );
-    setCentralWidget(mainLabel);
+    resize(1000,500);
+
+    QTableView * tableView = new QTableView(this);
+    MusicModel * tableModel = new MusicModel;
+    tableView->setModel(tableModel);
+    setCentralWidget(tableView);
+
+    // Right
+    QDockWidget * rightDock = new QDockWidget(tr("Playlist"), this);
+    rightDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+    QLabel * placeholderLabel = new QLabel(tr("Placeholder"), rightDock);
+    rightDock->setWidget(placeholderLabel);
+    addDockWidget(Qt::RightDockWidgetArea, rightDock);
 
     createMenus();
 }
@@ -36,7 +49,6 @@ void mmmc::createMenus() {
     fileMenu->addAction(openAction);
     fileMenu->addSeparator();
     fileMenu->addAction(quitAction);
-
 }
 
 void mmmc::open()
@@ -44,9 +56,9 @@ void mmmc::open()
     QString filename = QFileDialog::getOpenFileName(this, tr("Open a file caption"), "", "Music file (*.wav *.mp3)");
 
     if (filename != "") {
-	mainLabel->setText(filename);
+      // TODO: This is gone
+        //mainLabel->setText(filename);
     }
-
 }
 
 

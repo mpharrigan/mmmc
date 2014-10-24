@@ -6,15 +6,14 @@
 
 class mmmc : public QMainWindow
 {
-Q_OBJECT
+    Q_OBJECT
 public:
     mmmc();
     virtual ~mmmc();
 private slots:
-  void open();
+    void open();
 private:
-  QLabel* mainLabel;
-  void createMenus();
+    void createMenus();
 };
 
 #endif // mmmc_H
