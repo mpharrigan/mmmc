@@ -30,6 +30,10 @@ mmmc::mmmc()
 
     // Menus
     createMenus();
+    
+    // Data
+    //Library library;
+    
 }
 
 void mmmc::createMenus() {
@@ -53,6 +57,13 @@ void mmmc::createMenus() {
     fileMenu->addAction(openAction);
     fileMenu->addSeparator();
     fileMenu->addAction(quitAction);
+    
+    // Load directory
+    QAction* loadDirectoryMenu = new QAction(tr("Load Directory"), this);
+    connect(loadDirectoryMenu, SIGNAL(triggered(bool)), this, SLOT(loadDirectory()));
+    
+    QMenu* libraryMenu = menuBar()->addMenu(tr("&Library"));
+    libraryMenu->addAction(loadDirectoryMenu);
 }
 
 void mmmc::open()
@@ -64,10 +75,14 @@ void mmmc::open()
 
     }
     mainWidget->play(filename);
-
-
-
 }
+
+void mmmc::loadDirectory()
+{
+  Library lib = Library::fromDirectory("/home/harrigan/Music/newcd/");
+  //mainWidget->tableModel->setLibrary(lib);
+}
+
 
 
 mmmc::~mmmc()

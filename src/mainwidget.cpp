@@ -63,14 +63,10 @@ void MainWidget::updateMax(qint64 value)
     slider->setMaximum(value);
 }
 
-
-
 void MainWidget::updatePos(qint64 value)
 {
     slider->setValue(value );
 }
-
-
 
 
 

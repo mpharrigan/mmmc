@@ -2,12 +2,17 @@
 
 
 MusicModel::MusicModel(QObject* parent): QAbstractTableModel(parent)
-{}
+{
+}
+
+void MusicModel::setLibrary(Library& library)
+{
+}
 
 
 int MusicModel::rowCount(const QModelIndex& parent) const
 {
-    return 2;
+    return 0;
 }
 
 

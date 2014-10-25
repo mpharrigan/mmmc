@@ -2,6 +2,7 @@
 #define music_model_H
 
 #include <QAbstractTableModel>
+#include "library.h"
 
 class MusicModel : public QAbstractTableModel
 {
@@ -15,6 +16,9 @@ public:
     QVariant headerData(const QModelIndex & index, Qt::Orientation orientation, int role) const;
     Qt::ItemFlags flags(const QModelIndex & index) const;
     virtual ~MusicModel();
+    
+    void setLibrary(Library & library);
+
 };
 
 #endif // music_model_H

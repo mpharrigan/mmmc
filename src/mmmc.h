@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QLabel>
 #include "mainwidget.h"
+#include "library.h"
 
 class mmmc : public QMainWindow
 {
@@ -13,8 +14,10 @@ public:
     virtual ~mmmc();
 private slots:
     void open();
+    void loadDirectory();
 private:
     MainWidget * mainWidget;
+    //Library library;
     void createMenus();
 };
 
