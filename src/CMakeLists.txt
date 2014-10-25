@@ -6,7 +6,7 @@ find_package(Taglib REQUIRED)
 
 include_directories(${Qt5Core_INCLUDE_DIRS} ${Qt5Widgets_INCLUDE_DIRS} ${Qt5Multimedia_INCLUDE_DIRS} ${CMAKE_CURRENT_BINARY_DIR})
 
-set(mmmc_SRCS mainwidget.cpp song.cpp music_model.cpp mmmc.cpp main.cpp)
+set(mmmc_SRCS library.cpp mainwidget.cpp song.cpp music_model.cpp mmmc.cpp main.cpp)
 set(CMAKE_AUTOMOC ON)
 add_executable(mmmc ${mmmc_SRCS})
 

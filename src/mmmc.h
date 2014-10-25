@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QLabel>
+#include "mainwidget.h"
 
 class mmmc : public QMainWindow
 {
@@ -12,8 +13,8 @@ public:
     virtual ~mmmc();
 private slots:
     void open();
-    void updatePos(qint64);
 private:
+    MainWidget * mainWidget;
     void createMenus();
 };
 

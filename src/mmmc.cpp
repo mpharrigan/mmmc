@@ -1,5 +1,5 @@
 #include "mmmc.h"
-#include "music_model.h"
+#include "mainwidget.h"
 #include "song.h"
 
 #include <QMenu>
@@ -7,23 +7,19 @@
 #include <QAction>
 #include <QFileDialog>
 #include <QVBoxLayout>
-#include <QTableView>
+
+
 #include <QDockWidget>
 
-#include <QMediaPlayer>
-#include <QUrl>
-#include <QAudioProbe>
+
 
 #include <iostream>
 
 mmmc::mmmc()
 {
-    resize(1000,500);
-
-    QTableView * tableView = new QTableView(this);
-    MusicModel * tableModel = new MusicModel;
-    tableView->setModel(tableModel);
-    setCentralWidget(tableView);
+    // Center
+    mainWidget = new MainWidget;
+    setCentralWidget(mainWidget);
 
     // Right
     QDockWidget * rightDock = new QDockWidget(tr("Playlist"), this);
@@ -32,6 +28,7 @@ mmmc::mmmc()
     rightDock->setWidget(placeholderLabel);
     addDockWidget(Qt::RightDockWidgetArea, rightDock);
 
+    // Menus
     createMenus();
 }
 
@@ -66,21 +63,11 @@ void mmmc::open()
         Song mySong(filename.toStdString());
 
     }
+    mainWidget->play(filename);
 
-    QMediaPlayer * player = new QMediaPlayer();
-    player->setMedia(QUrl::fromLocalFile(filename));
 
-    connect(player, SIGNAL(positionChanged(qint64)), this, SLOT(updatePos(qint64)));
-
-    player->play();
 
 }
-
-void mmmc::updatePos(qint64 position)
-{
-    std::cout<<"Called\t" << position << std::endl;
-}
-
 
 
 mmmc::~mmmc()
