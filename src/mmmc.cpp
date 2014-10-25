@@ -79,8 +79,9 @@ void mmmc::open()
 
 void mmmc::loadDirectory()
 {
-  Library lib = Library::fromDirectory("/home/harrigan/Music/newcd/");
-  //mainWidget->tableModel->setLibrary(lib);
+  Library * lib = Library::fromDirectory("/home/harrigan/Music/newcd/");
+  mainWidget->tableModel->setLibrary(lib);
+  
 }
 
 

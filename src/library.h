@@ -8,8 +8,9 @@ class Library
 {
 public:
     Library();
-    static Library walkFilesystem(std::string base);
-    static Library fromDirectory(std::string dir);
+    Library(std::vector<Song> * songs);
+    static Library * walkFilesystem(std::string base);
+    static Library * fromDirectory(std::string dir);
 
     std::vector<Song> *  songs;
 

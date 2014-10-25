@@ -11,11 +11,13 @@
 class MainWidget :  public QWidget
 {
     Q_OBJECT
+    
 
 public:
     MainWidget(QWidget * parent = 0, Qt::WindowFlags f = 0);
     virtual QSize sizeHint() const;
     void play(const QString & filename);
+    MusicModel* tableModel;
 
 private slots:
     void updatePos(qint64 value);

@@ -8,11 +8,15 @@
 
 Library::Library()
 {
-    std::vector<Song> * songs;
+    songs = new std::vector<Song>();
+}
+
+Library::Library(std::vector<Song> * songs){
+  this->songs = songs;
 }
 
 
-Library Library::fromDirectory(std::string dir)
+Library * Library::fromDirectory(std::string dir)
 {
     QDir qdir(QString::fromStdString(dir));
     qdir.setFilter(QDir::Files);
@@ -32,13 +36,13 @@ Library Library::fromDirectory(std::string dir)
         songs->at(i) = song;
     }
 
-    Library library;
-    library.songs = songs;
+    Library * library = new Library(songs);
+    library->songs = songs;
     return library;
 }
 
 
-Library Library::walkFilesystem(std::string base)
+Library *  Library::walkFilesystem(std::string base)
 {
 
 }

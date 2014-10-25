@@ -16,7 +16,7 @@ MainWidget::MainWidget(QWidget* parent, Qt::WindowFlags f): QWidget(parent, f)
 {
     // Table
     QTableView * tableView = new QTableView;
-    MusicModel * tableModel = new MusicModel;
+    tableModel = new MusicModel;
     tableView->setModel(tableModel);
 
     // Slider
