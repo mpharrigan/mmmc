@@ -12,6 +12,7 @@ public:
     virtual ~mmmc();
 private slots:
     void open();
+    void updatePos(qint64);
 private:
     void createMenus();
 };

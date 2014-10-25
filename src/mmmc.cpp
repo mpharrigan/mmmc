@@ -10,6 +10,12 @@
 #include <QTableView>
 #include <QDockWidget>
 
+#include <QMediaPlayer>
+#include <QUrl>
+#include <QAudioProbe>
+
+#include <iostream>
+
 mmmc::mmmc()
 {
     resize(1000,500);
@@ -54,13 +60,27 @@ void mmmc::createMenus() {
 
 void mmmc::open()
 {
-    QString filename = QFileDialog::getOpenFileName(this, tr("Open a file caption"), "", "Music file (*.wav *.mp3)");
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open a file caption"), "/home/harrigan/Music/", "Music file (*.wav *.mp3)");
 
     if (filename != "") {
-      Song mySong(filename.toStdString());
-      
+        Song mySong(filename.toStdString());
+
     }
+
+    QMediaPlayer * player = new QMediaPlayer();
+    player->setMedia(QUrl::fromLocalFile(filename));
+
+    connect(player, SIGNAL(positionChanged(qint64)), this, SLOT(updatePos(qint64)));
+
+    player->play();
+
 }
+
+void mmmc::updatePos(qint64 position)
+{
+    std::cout<<"Called\t" << position << std::endl;
+}
+
 
 
 mmmc::~mmmc()
