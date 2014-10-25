@@ -1,8 +1,8 @@
 #ifndef mmmc_H
 #define mmmc_H
 
-#include <QtGui/QMainWindow>
-#include <QtGui/QLabel>
+#include <QMainWindow>
+#include <QLabel>
 
 class mmmc : public QMainWindow
 {

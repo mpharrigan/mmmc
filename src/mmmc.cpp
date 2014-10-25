@@ -1,13 +1,14 @@
 #include "mmmc.h"
 #include "music_model.h"
+#include "song.h"
 
-#include <QtGui/QMenu>
-#include <QtGui/QMenuBar>
-#include <QtGui/QAction>
-#include <QtGui/QFileDialog>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QTableView>
-#include <QtGui/QDockWidget>
+#include <QMenu>
+#include <QMenuBar>
+#include <QAction>
+#include <QFileDialog>
+#include <QVBoxLayout>
+#include <QTableView>
+#include <QDockWidget>
 
 mmmc::mmmc()
 {
@@ -56,8 +57,8 @@ void mmmc::open()
     QString filename = QFileDialog::getOpenFileName(this, tr("Open a file caption"), "", "Music file (*.wav *.mp3)");
 
     if (filename != "") {
-      // TODO: This is gone
-        //mainLabel->setText(filename);
+      Song mySong(filename.toStdString());
+      
     }
 }
 
