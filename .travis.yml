@@ -1,0 +1,15 @@
+language: cpp
+
+before_install:
+      # They don't have qt5 on ubuntu 12.04
+    - sudo apt-add-repository -y ppa:ubuntu-sdk-team/ppa
+    - sudo apt-get update -qq
+
+install:
+    - sudo apt-get install -qy qt5-default qtmultimedia5-dev libtag1-dev
+    - sudo apt-get install -qy cmake
+
+script:
+    - mkdir build && cd build
+    - cmake .. && make
+
