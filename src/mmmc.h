@@ -5,6 +5,7 @@
 #include <QLabel>
 #include "mainwidget.h"
 #include "library.h"
+#include "config/settingsdialog.h"
 
 class mmmc : public QMainWindow
 {
@@ -15,8 +16,10 @@ public:
 private slots:
     void open();
     void loadDirectory();
+    void showSettings();
 private:
     MainWidget * mainWidget;
+    SettingsDialog * settingsDialog;
     void createMenus();
 };
 

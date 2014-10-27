@@ -1,15 +1,14 @@
-find_package(Qt5Core REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Multimedia REQUIRED)
 find_package(Taglib REQUIRED)
 
-
-include_directories(${Qt5Core_INCLUDE_DIRS} ${Qt5Widgets_INCLUDE_DIRS} ${Qt5Multimedia_INCLUDE_DIRS} ${CMAKE_CURRENT_BINARY_DIR})
-
-set(mmmc_SRCS library.cpp mainwidget.cpp song.cpp music_model.cpp mmmc.cpp main.cpp)
 set(CMAKE_AUTOMOC ON)
-add_executable(mmmc ${mmmc_SRCS})
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+add_subdirectory(config)
 
-target_link_libraries(mmmc ${TAGLIB_LIBRARIES} Qt5::Core Qt5::Widgets Qt5::Multimedia)
-install(TARGETS mmmc RUNTIME DESTINATION bin)
+add_executable(mmmc library.cpp mainwidget.cpp song.cpp music_model.cpp mmmc.cpp main.cpp)
+qt5_use_modules(mmmc Core Widgets Multimedia)
+
+target_link_libraries(mmmc mmmc_config ${TAGLIB_LIBRARIES})
+

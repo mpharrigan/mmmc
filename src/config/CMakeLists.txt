@@ -1,0 +1,2 @@
+add_library(mmmc_config settingsdialog.cpp)
+qt5_use_modules(mmmc_config Widgets)
