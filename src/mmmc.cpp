@@ -7,13 +7,9 @@
 #include <QAction>
 #include <QFileDialog>
 #include <QVBoxLayout>
-
-
 #include <QDockWidget>
 
-
-
-#include <iostream>
+#include <QDebug>
 
 mmmc::mmmc()
 {
@@ -30,13 +26,11 @@ mmmc::mmmc()
 
     // Menus
     createMenus();
-    
-    // Data
-    //Library library;
-    
 }
 
 void mmmc::createMenus() {
+    qDebug() << "Making menus";
+  
     // New
     QAction* newAction = new QAction(this);
     newAction->setText(tr("&New"));
@@ -57,11 +51,11 @@ void mmmc::createMenus() {
     fileMenu->addAction(openAction);
     fileMenu->addSeparator();
     fileMenu->addAction(quitAction);
-    
+
     // Load directory
     QAction* loadDirectoryMenu = new QAction(tr("Load Directory"), this);
     connect(loadDirectoryMenu, SIGNAL(triggered(bool)), this, SLOT(loadDirectory()));
-    
+
     QMenu* libraryMenu = menuBar()->addMenu(tr("&Library"));
     libraryMenu->addAction(loadDirectoryMenu);
 }
@@ -71,20 +65,16 @@ void mmmc::open()
     QString filename = QFileDialog::getOpenFileName(this, tr("Open a file caption"), "/home/harrigan/Music/", "Music file (*.wav *.mp3)");
 
     if (filename != "") {
-        Song mySong(filename.toStdString());
-
-    }
-    mainWidget->play(filename);
+        Song mySong(filename);
+	mainWidget->play(filename);
+    }    
 }
 
 void mmmc::loadDirectory()
 {
-  Library * lib = Library::fromDirectory("/home/harrigan/Music/newcd/");
-  mainWidget->tableModel->setLibrary(lib);
-  
+    Library * lib = Library::fromDirectory("/home/harrigan/Music/newcd/");
+    mainWidget->tableModel->setLibrary(lib);
 }
-
-
 
 mmmc::~mmmc()
 {}

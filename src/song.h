@@ -2,16 +2,16 @@
 #ifndef SONG_H
 #define SONG_H
 
-#include <string>
+#include <QString>
 
 class Song
 {
 public:
-  Song(const std::string & title = "", const std::string & artist = "", const std::string & album = "");
-  static Song fromMp3(const std::string& filename);
-    std::string artist;
-  std::string album;
-  std::string title;
+    Song(const QString & title = "", const QString & artist = "", const QString & album = "");
+    static Song fromMp3(const QString & filename);
+    QString artist;
+    QString album;
+    QString title;
 private:
 
 };

@@ -17,7 +17,6 @@ private slots:
     void loadDirectory();
 private:
     MainWidget * mainWidget;
-    //Library library;
     void createMenus();
 };
 
