@@ -25,19 +25,16 @@ Library * Library::fromDirectory(const QString& dir)
     qdir.setNameFilters(nameFilters);
 
     QStringList filenames = qdir.entryList();
-    QString filename;
-    Song song;
     std::vector<Song> * songs = new std::vector<Song>(filenames.size());
 
     for(int i = 0; i < filenames.size(); ++i) {
-        filename = filenames.at(i);
-        song = Song::fromMp3(qdir.absoluteFilePath(filename));
+        QString filename = filenames.at(i);
+        Song song = Song::fromMp3(qdir.absoluteFilePath(filename));
         qDebug() << "Made song" << song.title << song.artist << song.album;
         songs->at(i) = song;
     }
 
     Library * library = new Library(songs);
-    library->songs = songs;
     return library;
 }
 

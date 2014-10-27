@@ -12,6 +12,7 @@ public:
     QString artist;
     QString album;
     QString title;
+    QString filename;
 private:
 
 };
