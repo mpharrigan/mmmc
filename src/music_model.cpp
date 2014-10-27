@@ -15,6 +15,12 @@ void MusicModel::setLibrary(Library * library)
     endResetModel();
 }
 
+Song MusicModel::getSong(const QModelIndex& index)
+{
+    return library->songs->at(index.row());
+}
+
+
 int MusicModel::rowCount(const QModelIndex& parent) const
 {
     return library->songs->size();
@@ -27,18 +33,16 @@ int MusicModel::columnCount(const QModelIndex& parent) const
 
 QVariant MusicModel::data(const QModelIndex& index, int role) const
 {
-    if (role == Qt::DisplayRole) {
+    switch(role) {
+    case Qt::DisplayRole:
         Song s = library->songs->at(index.row());
         switch(index.column()) {
         case 0:
             return s.album;
-            break;
         case 1:
             return s.artist;
-            break;
         case 2:
             return s.title;
-            break;
         default:
             return QString("Uh oh!");
         }

@@ -3,6 +3,8 @@
 
 #include <QAbstractTableModel>
 #include "library.h"
+#include "song.h"
+
 
 class MusicModel : public QAbstractTableModel
 {
@@ -16,10 +18,11 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;
     Qt::ItemFlags flags(const QModelIndex & index) const;
     virtual ~MusicModel();
-    
+
     void setLibrary(Library * library);
+    Song getSong(const QModelIndex & index);
 private:
-  Library * library;
+    Library * library;
 
 };
 

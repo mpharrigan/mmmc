@@ -5,6 +5,7 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QTableView>
+#include <QHeaderView>
 
 #include <QMediaPlayer>
 #include <QUrl>
@@ -18,6 +19,11 @@ MainWidget::MainWidget(QWidget* parent, Qt::WindowFlags f): QWidget(parent, f)
     QTableView * tableView = new QTableView;
     tableModel = new MusicModel;
     tableView->setModel(tableModel);
+    tableView->horizontalHeader()->setDefaultSectionSize(300);
+    tableView->horizontalHeader()->setStretchLastSection(true);
+    tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    connect(tableView, SIGNAL(doubleClicked(QModelIndex)),
+            this, SLOT(doubleClickRow(QModelIndex)));
 
     // Slider
     slider = new QSlider;
@@ -44,6 +50,18 @@ MainWidget::MainWidget(QWidget* parent, Qt::WindowFlags f): QWidget(parent, f)
 QSize MainWidget::sizeHint() const
 {
     return QSize(1000,600);
+}
+
+void MainWidget::doubleClickRow(const QModelIndex& index)
+{
+    qDebug() << "Double click" << index;
+    Song s = tableModel->getSong(index);
+    play(s);
+}
+
+void MainWidget::play(const Song& song)
+{
+    this->play(song.filename);
 }
 
 void MainWidget::play(const QString& filename)
