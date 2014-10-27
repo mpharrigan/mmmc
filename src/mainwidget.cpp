@@ -10,7 +10,7 @@
 #include <QUrl>
 #include <QAudioProbe>
 
-#include <iostream>
+#include <QDebug>
 
 MainWidget::MainWidget(QWidget* parent, Qt::WindowFlags f): QWidget(parent, f)
 {
@@ -60,6 +60,7 @@ void MainWidget::play(const QString& filename)
 
 void MainWidget::updateMax(qint64 value)
 {
+    qDebug() << "Setting maximum slider position" << value;
     slider->setMaximum(value);
 }
 

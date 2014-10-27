@@ -1,5 +1,6 @@
 #include "music_model.h"
-#include <iostream>
+
+#include <QDebug>
 
 MusicModel::MusicModel(QObject* parent): QAbstractTableModel(parent)
 {
@@ -8,20 +9,16 @@ MusicModel::MusicModel(QObject* parent): QAbstractTableModel(parent)
 
 void MusicModel::setLibrary(Library * library)
 {
-    //delete this->library;
     beginResetModel();
-    std::cout<<"Setting library "<<library->songs->size()<<std::endl;
+    qDebug() << "Setting library" << library->songs->size();
     this->library = library;
     endResetModel();
-
 }
-
 
 int MusicModel::rowCount(const QModelIndex& parent) const
 {
     return library->songs->size();
 }
-
 
 int MusicModel::columnCount(const QModelIndex& parent) const
 {
@@ -34,13 +31,13 @@ QVariant MusicModel::data(const QModelIndex& index, int role) const
         Song s = library->songs->at(index.row());
         switch(index.column()) {
         case 0:
-            return QString::fromStdString(s.album);
+            return s.album;
             break;
         case 1:
-            return QString::fromStdString(s.artist);
+            return s.artist;
             break;
         case 2:
-            return QString::fromStdString(s.title);
+            return s.title;
             break;
         default:
             return QString("Uh oh!");
@@ -57,7 +54,7 @@ Qt::ItemFlags MusicModel::flags(const QModelIndex& index) const
 
 QVariant MusicModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-  
+
     if(role == Qt::DisplayRole) {
         if(orientation == Qt::Horizontal) {
             switch(section) {
@@ -79,9 +76,7 @@ QVariant MusicModel::headerData(int section, Qt::Orientation orientation, int ro
 }
 
 MusicModel::~MusicModel()
-{
-
-}
+{ }
 
 #include "music_model.moc"
 
