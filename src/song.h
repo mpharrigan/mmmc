@@ -4,8 +4,7 @@
 
 #include <QString>
 
-class Song
-{
+class Song {
 public:
     Song(const QString & title = "", const QString & artist = "", const QString & album = "");
     static Song fromMp3(const QString & filename);

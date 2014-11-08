@@ -6,8 +6,7 @@
 
 #include <vector>
 
-Library::Library()
-{
+Library::Library() {
     songs = new std::vector<Song>();
 }
 
@@ -16,8 +15,7 @@ Library::Library(std::vector<Song> * songs) {
 }
 
 
-Library * Library::fromDirectory(const QString& dir)
-{
+Library * Library::fromDirectory(const QString & dir) {
     QDir qdir(dir);
     qdir.setFilter(QDir::Files);
     QStringList nameFilters;
@@ -27,7 +25,7 @@ Library * Library::fromDirectory(const QString& dir)
     QStringList filenames = qdir.entryList();
     std::vector<Song> * songs = new std::vector<Song>(filenames.size());
 
-    for(int i = 0; i < filenames.size(); ++i) {
+    for (int i = 0; i < filenames.size(); ++i) {
         QString filename = filenames.at(i);
         Song song = Song::fromMp3(qdir.absoluteFilePath(filename));
         qDebug() << "Made song" << song.title << song.artist << song.album;
@@ -39,7 +37,6 @@ Library * Library::fromDirectory(const QString& dir)
 }
 
 
-Library *  Library::walkFilesystem(const QString& base)
-{
+Library  * Library::walkFilesystem(const QString & base) {
 
 }
