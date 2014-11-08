@@ -6,12 +6,11 @@
 #include "song.h"
 
 
-class MusicModel : public QAbstractTableModel
-{
+class MusicModel : public QAbstractTableModel {
     Q_OBJECT
 
 public:
-    MusicModel(QObject* parent = 0);
+    MusicModel(QObject * parent = 0);
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
     int columnCount(const QModelIndex & parent = QModelIndex()) const;
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;

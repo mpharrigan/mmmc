@@ -12,8 +12,7 @@
 
 #include <QDebug>
 
-mmmc::mmmc()
-{
+mmmc::mmmc() {
     // Center
     mainWidget = new MainWidget;
     setCentralWidget(mainWidget);
@@ -27,7 +26,7 @@ mmmc::mmmc()
 
     // Menus
     createMenus();
-    
+
     settingsDialog = 0;
 }
 
@@ -35,43 +34,42 @@ void mmmc::createMenus() {
     qDebug() << "Making menus";
 
     // File -> New
-    QAction* newAction = new QAction(this);
+    QAction * newAction = new QAction(this);
     newAction->setText(tr("&New"));
 
     // File -> Open
-    QAction* openAction = new QAction(this);
+    QAction * openAction = new QAction(this);
     openAction->setText(tr("&Open"));
     connect(openAction, SIGNAL(triggered()), SLOT(open()));
 
     // File -> Quit
-    QAction* quitAction = new QAction(this);
+    QAction * quitAction = new QAction(this);
     quitAction->setText(tr("&Quit"));
     connect(quitAction, SIGNAL(triggered()), SLOT(close()));
 
     // File
-    QMenu* fileMenu = menuBar()->addMenu(tr("&File"));
+    QMenu * fileMenu = menuBar()->addMenu(tr("&File"));
     fileMenu->addAction(newAction);
     fileMenu->addAction(openAction);
     fileMenu->addSeparator();
     fileMenu->addAction(quitAction);
 
     // Library -> Load directory
-    QAction* loadDirectoryMenu = new QAction(tr("Load Directory"), this);
+    QAction * loadDirectoryMenu = new QAction(tr("Load Directory"), this);
     connect(loadDirectoryMenu, SIGNAL(triggered(bool)), this, SLOT(loadDirectory()));
-    
+
     // Library -> Settings
     QAction * settingsMenu = new QAction(tr("&Settings"), this);
     connect(settingsMenu, SIGNAL(triggered(bool)), this, SLOT(showSettings()));
 
     // Library
-    QMenu* libraryMenu = menuBar()->addMenu(tr("&Library"));
+    QMenu * libraryMenu = menuBar()->addMenu(tr("&Library"));
     libraryMenu->addAction(loadDirectoryMenu);
     libraryMenu->addSeparator();
     libraryMenu->addAction(settingsMenu);
 }
 
-void mmmc::open()
-{
+void mmmc::open() {
     QString filename = QFileDialog::getOpenFileName(this, tr("Open a file caption"), "/home/harrigan/Music/", "Music file (*.wav *.mp3)");
 
     if (filename != "") {
@@ -80,16 +78,14 @@ void mmmc::open()
     }
 }
 
-void mmmc::loadDirectory()
-{
+void mmmc::loadDirectory() {
     QSettings settings;
     QString libdir = settings.value("library/directory", "~/Music/").toString();
     Library * lib = Library::fromDirectory(libdir);
     mainWidget->tableModel->setLibrary(lib);
 }
 
-void mmmc::showSettings()
-{
+void mmmc::showSettings() {
     if (!settingsDialog) {
         settingsDialog = new SettingsDialog(this);
     }

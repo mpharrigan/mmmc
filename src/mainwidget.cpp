@@ -13,8 +13,7 @@
 
 #include <QDebug>
 
-MainWidget::MainWidget(QWidget* parent, Qt::WindowFlags f): QWidget(parent, f)
-{
+MainWidget::MainWidget(QWidget * parent, Qt::WindowFlags f): QWidget(parent, f) {
     // Table
     QTableView * tableView = new QTableView;
     tableModel = new MusicModel;
@@ -47,25 +46,21 @@ MainWidget::MainWidget(QWidget* parent, Qt::WindowFlags f): QWidget(parent, f)
     setLayout(layout);
 }
 
-QSize MainWidget::sizeHint() const
-{
-    return QSize(1000,600);
+QSize MainWidget::sizeHint() const {
+    return QSize(1000, 600);
 }
 
-void MainWidget::doubleClickRow(const QModelIndex& index)
-{
+void MainWidget::doubleClickRow(const QModelIndex & index) {
     qDebug() << "Double click" << index;
     Song s = tableModel->getSong(index);
     play(s);
 }
 
-void MainWidget::play(const Song& song)
-{
+void MainWidget::play(const Song & song) {
     this->play(song.filename);
 }
 
-void MainWidget::play(const QString& filename)
-{
+void MainWidget::play(const QString & filename) {
     QMediaPlayer * player = new QMediaPlayer();
     player->setMedia(QUrl::fromLocalFile(filename));
 
@@ -76,15 +71,13 @@ void MainWidget::play(const QString& filename)
     playButton->setText("Pause");
 }
 
-void MainWidget::updateMax(qint64 value)
-{
+void MainWidget::updateMax(qint64 value) {
     qDebug() << "Setting maximum slider position" << value;
     slider->setMaximum(value);
 }
 
-void MainWidget::updatePos(qint64 value)
-{
-    slider->setValue(value );
+void MainWidget::updatePos(qint64 value) {
+    slider->setValue(value);
 }
 
 

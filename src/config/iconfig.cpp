@@ -6,13 +6,13 @@
 Config::Config(const QString & config_key, QWidget * widget, const QVariant & defval): QObject() {
     this->widget = widget;
     this->config_key = config_key;
-    
-    
+
+
     connect(widget, SIGNAL(configChanged(QVariant)),
             this, SLOT(changeConfig(QVariant)));
     connect(this, SIGNAL(configChanged(QVariant)),
             widget, SLOT(changeConfig(QVariant)));
-    
+
     QSettings settings;
     QVariant defvarval = settings.value(config_key, defval);
     emit configChanged(defvarval);

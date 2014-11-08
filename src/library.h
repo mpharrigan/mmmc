@@ -6,11 +6,10 @@
 
 #include <QString>
 
-class Library
-{
+class Library {
 public:
     Library();
-    Library(std::vector< Song >* songs);
+    Library(std::vector< Song > * songs);
     static Library * walkFilesystem(const QString & base);
     static Library * fromDirectory(const QString & dir);
 

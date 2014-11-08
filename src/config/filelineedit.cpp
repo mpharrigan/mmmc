@@ -7,13 +7,12 @@
 
 FileLineEdit::FileLineEdit(const QString & label,
                            const QString & default_val,
-                           QWidget * parent): QWidget(parent)
-{
+                           QWidget * parent): QWidget(parent) {
     savedValue = new QString(default_val);
     lineEdit = new QLineEdit(default_val, parent);
     connect(lineEdit, SIGNAL(editingFinished()),
             this, SLOT(editingFinished()));
-    
+
     browseButton = new QPushButton("Browse", parent);
     QLabel * labelLabel = new QLabel(label);
 
@@ -28,7 +27,7 @@ FileLineEdit::FileLineEdit(const QString & label,
 void FileLineEdit::editingFinished() {
     qDebug() << "Editing finished";
 
-    if (lineEdit->text() != savedValue){
+    if (lineEdit->text() != savedValue) {
         delete savedValue;
         savedValue = new QString(lineEdit->text());
         qDebug() << "Detected that value is different";
@@ -37,12 +36,12 @@ void FileLineEdit::editingFinished() {
 
 }
 
-void FileLineEdit::changeConfig(const QVariant & val ) {
+void FileLineEdit::changeConfig(const QVariant & val) {
     qDebug() << "Changing config on FileLineEdit" << val;
     delete savedValue;
-    savedValue = new QString( val.toString());
+    savedValue = new QString(val.toString());
     lineEdit->setText(val.toString());
-    
+
 }
 
 

@@ -5,11 +5,10 @@
 #include <QList>
 #include "iconfig.h"
 
-class SettingsDialog : public QDialog
-{
+class SettingsDialog : public QDialog {
     Q_OBJECT
 public:
-    explicit SettingsDialog(QWidget* parent = 0, Qt::WindowFlags f = 0);
+    explicit SettingsDialog(QWidget * parent = 0, Qt::WindowFlags f = 0);
 
 private:
     QList<Config * > makeConfigs();

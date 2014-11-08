@@ -7,8 +7,7 @@
 #include "library.h"
 #include "config/settingsdialog.h"
 
-class mmmc : public QMainWindow
-{
+class mmmc : public QMainWindow {
     Q_OBJECT
 public:
     mmmc();
