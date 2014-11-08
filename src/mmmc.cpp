@@ -8,6 +8,7 @@
 #include <QFileDialog>
 #include <QVBoxLayout>
 #include <QDockWidget>
+#include <QSettings>
 
 #include <QDebug>
 
@@ -81,7 +82,9 @@ void mmmc::open()
 
 void mmmc::loadDirectory()
 {
-    Library * lib = Library::fromDirectory("/home/harrigan/Music/newcd/");
+    QSettings settings;
+    QString libdir = settings.value("library/directory", "~/Music/").toString();
+    Library * lib = Library::fromDirectory(libdir);
     mainWidget->tableModel->setLibrary(lib);
 }
 

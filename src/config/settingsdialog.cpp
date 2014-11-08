@@ -1,20 +1,36 @@
 #include "settingsdialog.h"
 #include "filelineedit.h"
+#include "iconfig.h"
 
-#include <QHBoxLayout>
+
 #include <QVBoxLayout>
+#include <QList>
 
 SettingsDialog::SettingsDialog(QWidget* parent, Qt::WindowFlags f): QDialog(parent, f)
 {
-
-    FileLineEdit * fl1 = new FileLineEdit("Fl1", this);
-    FileLineEdit * fl2 = new FileLineEdit("Fl2", this);
-
+    QList<Config * > configs = makeConfigs();    
     QVBoxLayout * layout = new QVBoxLayout;
-    layout->addWidget(fl1);
-    layout->addWidget(fl2);
-
+    
+    for (QList<Config * >::const_iterator ci = configs.constBegin(); ci != configs.constEnd(); ++ci){
+        layout->addWidget((*ci)->getWidget());
+    }
     setLayout(layout);
+    setWindowTitle("Settings");
+}
+
+QList<Config * > SettingsDialog::makeConfigs() {
+    // Library directory config
+    FileLineEdit * fl1 = new FileLineEdit("Library Directory", "", this);
+    Config * c1 = new Config("library/directory", fl1, "~/Music/");
+    
+    //Config 2
+    FileLineEdit * fl2 = new FileLineEdit("fl2", "", this);
+    Config * c2 = new Config("fl2_key", fl2, "fl2");
+    
+    // Make list
+    QList<Config * > list;
+    list << c1 << c2;
+    return list;
 }
 
 
